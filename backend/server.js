@@ -1,0 +1,18 @@
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const connectDB = require('./config/db');
+
+app.use(cors());
+app.use('/backend/uploads', express.static('./backend/uploads'));
+app.use(express.json());
+app.use(express.urlencoded());
+
+connectDB();
+
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/posts', require('./routes/posts'));
+
+const PORT = process.env.PORT | 5000;
+
+app.listen(PORT, console.log(`server started on port ${PORT}`));
