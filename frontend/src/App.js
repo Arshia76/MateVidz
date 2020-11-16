@@ -7,8 +7,8 @@ import Register from './Pages/Register';
 import Login from './Pages/Login';
 import { ToastContainer } from 'react-toastify';
 import { loadUser } from './Actions/Auth';
-
 import { useDispatch } from 'react-redux';
+import Dashboard from './Pages/Dashboard';
 
 function App({ history }) {
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ function App({ history }) {
         <Header />
         <Switch>
           <PrivateRoute exact path='/' component={Home} />
+          <PrivateRoute exact path='/dashboard' component={Dashboard} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
         </Switch>

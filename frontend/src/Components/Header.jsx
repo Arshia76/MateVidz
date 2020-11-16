@@ -35,7 +35,7 @@ const Header = () => {
             </Link>
             {auth ? (
               <>
-                <Link className='link'>
+                <Link className='link' to='/dashboard'>
                   <Nav.Link as='li'> سلام {user}</Nav.Link>
                 </Link>
                 <Link className='link' onClick={handleShow}>
