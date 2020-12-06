@@ -37,3 +37,22 @@ a {
 .link:hover {
   text-decoration: none;
 }
+
+.comment-container {
+  height: 40vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-bottom: 1rem;
+}
+
+.comment-container .comment {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  direction: rtl;
+  margin-bottom: 3rem;
+}
+
+.comment-container .comment h4 {
+  margin: 0 1rem;
+}

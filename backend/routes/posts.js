@@ -14,6 +14,24 @@ router.get('/', authorize, async (req, res) => {
   }
 });
 
+router.get('/:id', authorize, async (req, res) => {
+  try {
+    const posts = await Post.find({ creator: req.params.id });
+    return res.status(200).json(posts);
+  } catch (err) {
+    return res.status(500).json({ msg: 'خطای سرور' });
+  }
+});
+
+router.get('/detail/:id', authorize, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    return res.status(200).json(post);
+  } catch (err) {
+    return res.status(500).json({ msg: 'خطای سرور' });
+  }
+});
+
 router.post(
   '/create',
   authorize,
@@ -39,6 +57,7 @@ router.post(
         title,
         message,
         image: file.path,
+        reviews: [],
       });
       return res.status(201).json(post);
     } catch (err) {
@@ -91,6 +110,81 @@ router.delete('/delete/:id', authorize, async (req, res) => {
       id: post._id,
       msg: 'پست با موفقیت حذف گردید',
     });
+  } catch (err) {
+    return res.status(500).json({ msg: 'خطای سرور' });
+  }
+});
+
+router.post(
+  '/review/:id',
+  authorize,
+  [check('comment').not().isEmpty().withMessage('لطفا نظر خود را بنویسید.')],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array(),
+      });
+    }
+
+    try {
+      const { comment } = req.body;
+      const creator = req.user._id;
+      const post = await Post.findById(req.params.id);
+
+      const alreadyReviewed = post.reviews.find(
+        (r) => r.userId.toString() === creator.toString()
+      );
+
+      if (alreadyReviewed) {
+        return res.status(400).json({ msg: 'نظر شما ثبت شده است.' });
+      }
+
+      const review = {
+        username: req.user.username,
+        comment,
+        userId: creator,
+      };
+
+      post.reviews.push(review);
+
+      await post.save();
+      return res.status(200).json({ msg: 'نظر شما ثبت شد.' });
+    } catch (err) {
+      return res.status(500).json({ msg: 'خطای سرور' });
+    }
+  }
+);
+
+router.get('/reviews/:id', authorize, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    return res.status(200).json({ reviews: post.reviews });
+  } catch (err) {
+    return res.status(500).json({ msg: 'خطای سرور' });
+  }
+});
+
+router.put('/likes/:id', authorize, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    const alreadyLiked = post.likes.users.includes(req.user._id);
+
+    if (alreadyLiked)
+      return res.status(400).json({ msg: 'شما این پست را پسندیده اید.' });
+
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        likes: {
+          like: post.likes.like + 1,
+          users: [...post.likes.users, req.user._id],
+        },
+      },
+      { new: true }
+    );
+    return res.status(200).json(updatedPost);
   } catch (err) {
     return res.status(500).json({ msg: 'خطای سرور' });
   }

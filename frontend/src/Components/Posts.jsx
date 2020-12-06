@@ -6,12 +6,14 @@ import { useSelector } from 'react-redux';
 
 const Posts = () => {
   const posts = useSelector((state) => state.posts.posts);
+  const searchPosts = useSelector((state) => state.search.posts);
+
   return (
-    <Container>
+    <Container className='p-4'>
       <Row>
-        {posts.map((post) => (
-          <Post key={post._id} post={post} />
-        ))}
+        {searchPosts
+          ? searchPosts.map((post) => <Post key={post._id} post={post} />)
+          : posts.map((post) => <Post key={post._id} post={post} />)}
       </Row>
     </Container>
   );

@@ -4,7 +4,7 @@ import * as types from '../Types';
 export const register = (formData) => async (dispatch) => {
   try {
     setLoding();
-    const res = await axios.post('api/auth/register', formData);
+    const res = await axios.post('/api/auth/register', formData);
 
     dispatch({
       type: types.REGISTER_SUCCESSFUL,
@@ -21,7 +21,7 @@ export const register = (formData) => async (dispatch) => {
 export const login = (formData) => async (dispatch) => {
   try {
     setLoding();
-    const res = await axios.post('api/auth/login', formData, {
+    const res = await axios.post('/api/auth/login', formData, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -52,7 +52,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const loadUser = () => async (dispatch) => {
-  const res = await axios.get('api/auth/user', {
+  const res = await axios.get('/api/auth/user', {
     headers: {
       'auth-token': localStorage.getItem('auth-token'),
     },

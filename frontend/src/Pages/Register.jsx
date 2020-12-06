@@ -8,9 +8,9 @@ import { clearErrors } from '../Actions/Auth';
 const Register = ({ history }) => {
   const [state, setState] = useState({
     email: '',
-    password: '',
     userImage: '',
     username: '',
+    password: '',
   });
 
   const error = useSelector((state) => state.auth.error);
@@ -20,8 +20,8 @@ const Register = ({ history }) => {
     if (error) {
       toast.error(error.msg || error.errors[0].msg);
     }
-    dispatch(clearErrors());
     auth && history.push('/');
+    dispatch(clearErrors());
   }, [error, history, auth, dispatch]);
 
   const submit = (e) => {
@@ -31,7 +31,6 @@ const Register = ({ history }) => {
     data.append('email', state.email);
     data.append('username', state.username);
     data.append('password', state.password);
-    console.log(data);
     dispatch(register(data));
   };
 
@@ -70,10 +69,9 @@ const Register = ({ history }) => {
             placeholder='ایمیل'
           />
         </Form.Group>
-
         <Form.Group className='text-center' controlId='formBasicPassword'>
           <Form.Control
-            className='bg-primary text-success w-75 mx-auto'
+            className='bg-primary text-success  w-75 mx-auto'
             style={{ borderRadius: '5rem' }}
             onChange={onChange}
             type='password'
@@ -89,11 +87,9 @@ const Register = ({ history }) => {
           <Form.File
             onChange={(e) => {
               setState({ ...state, userImage: e.target.files[0] });
-              console.log(state);
             }}
             id='custom-file'
             className='bg-primary text-success'
-            value={state.userImage}
             style={{
               borderRadius: '5rem',
               border: '1px solid white',
@@ -104,7 +100,7 @@ const Register = ({ history }) => {
 
         <div style={{ textAlign: 'center' }}>
           <Button
-            variant='primary'
+            variant='dark'
             onClick={submit}
             type='submit'
             style={{ borderRadius: '5rem', width: '8rem' }}

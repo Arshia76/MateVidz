@@ -13,14 +13,15 @@ const Login = ({ history }) => {
 
   const error = useSelector((state) => state.auth.error);
   const auth = useSelector((state) => state.auth.isAuthenticated);
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (error) {
       toast.error(error.msg || error.errors[0].msg);
     }
-    dispatch(clearErrors());
     auth && history.push('/');
-  }, [error, auth, history, dispatch]);
+    dispatch(clearErrors());
+  }, [error, dispatch, auth, history]);
 
   const submit = (e) => {
     e.preventDefault();
@@ -66,7 +67,7 @@ const Login = ({ history }) => {
 
         <div style={{ textAlign: 'center' }}>
           <Button
-            variant='primary'
+            variant='dark'
             onClick={submit}
             type='submit'
             style={{ borderRadius: '5rem', width: '8rem' }}

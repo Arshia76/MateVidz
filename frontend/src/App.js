@@ -9,15 +9,16 @@ import { ToastContainer } from 'react-toastify';
 import { loadUser } from './Actions/Auth';
 import { useDispatch } from 'react-redux';
 import Dashboard from './Pages/Dashboard';
+import Detail from './Pages/Detail';
 
-function App({ history }) {
+function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (localStorage.getItem('auth-token')) {
       dispatch(loadUser());
     }
-  }, [dispatch, history]);
+  }, [dispatch]);
   return (
     <Fragment>
       <Router>
@@ -25,6 +26,7 @@ function App({ history }) {
         <Switch>
           <PrivateRoute exact path='/' component={Home} />
           <PrivateRoute exact path='/dashboard' component={Dashboard} />
+          <PrivateRoute exact path='/detail/:id' component={Detail} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
         </Switch>

@@ -30,6 +30,9 @@ const Changer = ({ post, show, handleClose, type }) => {
     type === 'بروز رسانی'
       ? dispatch(updatePost(post._id, form))
       : dispatch(createPost(form));
+
+    setState({ ...state, title: '', message: '', postImage: '' });
+    handleClose();
   };
   return (
     <Fragment>
