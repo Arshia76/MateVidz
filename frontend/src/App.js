@@ -7,18 +7,19 @@ import Register from './Pages/Register';
 import Login from './Pages/Login';
 import { ToastContainer } from 'react-toastify';
 import { loadUser } from './Actions/Auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Dashboard from './Pages/Dashboard';
 import Detail from './Pages/Detail';
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.users.user);
 
   useEffect(() => {
     if (localStorage.getItem('auth-token')) {
       dispatch(loadUser());
     }
-  }, [dispatch]);
+  }, [dispatch, user]);
   return (
     <Fragment>
       <Router>

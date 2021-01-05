@@ -18,7 +18,7 @@ const Header = () => {
   useEffect(() => {
     if (error) toast.error(error.msg || error.errors[0].msg);
     dispatch(clearErrors());
-  });
+  }, []);
   const dispatch = useDispatch();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

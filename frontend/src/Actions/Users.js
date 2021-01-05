@@ -1,8 +1,8 @@
 import * as types from '../Types';
 import axios from 'axios';
 export const getUser = (id) => async (dispatch) => {
+  setLoding();
   try {
-    setLoding();
     const res = await axios.get(`/api/users/${id}`, {
       headers: {
         'auth-token': localStorage.getItem('auth-token'),
@@ -22,8 +22,8 @@ export const getUser = (id) => async (dispatch) => {
 };
 
 export const updateUser = (id, data) => async (dispatch) => {
+  setLoding();
   try {
-    setLoding();
     const res = await axios.put(`/api/users/update/${id}`, data, {
       headers: {
         'auth-token': localStorage.getItem('auth-token'),

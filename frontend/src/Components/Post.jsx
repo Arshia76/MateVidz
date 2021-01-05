@@ -21,8 +21,8 @@ const Post = ({ post, getPostDetail }) => {
 
   return (
     <Fragment>
-      <Col xs={12} sm={6} lg={4} className=' mt-4'>
-        <Card style={{ width: '20rem', margin: 'auto' }}>
+      <Col xs={12} sm={6} lg={4} className='mt-4'>
+        <Card style={{ width: '100%', margin: 'auto' }}>
           <Card.Img
             onClick={async () => {
               await getPostDetail(post._id);
@@ -45,6 +45,7 @@ const Post = ({ post, getPostDetail }) => {
             >
               <svg
                 onClick={Like}
+                style={{ cursor: 'pointer' }}
                 width='20px'
                 height='20px'
                 viewBox='0 0 16 16'

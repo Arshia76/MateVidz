@@ -4,23 +4,31 @@ import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../Actions/Users';
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.user);
-  const error = useSelector((state) => state.users.error);
-  const history = useHistory();
-  useEffect(() => {
-    if (error) {
-      toast.error(error.msg || error.errors[0].msg);
-    }
-  }, [error]);
+  const userError = useSelector((state) => state.users.error);
+  const postError = useSelector((state) => state.posts.error);
   const [state, setState] = useState({
     username: user.username,
     userImage: user.image,
     email: user.email,
   });
+  useEffect(() => {
+    if (userError) {
+      toast.error(userError.msg || userError.errors[0].msg);
+    } else if (postError) {
+      toast.error(postError.msg || postError.errors[0].msg);
+    } else {
+      setState({
+        ...state,
+        username: user.username,
+        userImage: user.image,
+        email: user.email,
+      });
+    }
+  }, [userError, postError, user]);
 
   const onChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -33,7 +41,10 @@ const Dashboard = () => {
     data.append('email', state.email);
     data.append('username', state.username);
     dispatch(updateUser(user._id, data));
-    error === null && history.push('/');
+    setState({
+      ...state,
+      userImage: '',
+    });
   };
   return (
     <Container className='p-4 mt-5'>

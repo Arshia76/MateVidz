@@ -24,7 +24,6 @@ router.put(
       .isEmpty()
       .withMessage('لطفا نام کاربری را وارد کنید.'),
     check('email').isEmail().withMessage('لطفا ایمیل معتبری وارد کنید.'),
-    check('file').not().isEmpty().withMessage('لطفا عکس پروفایل انتخاب کنید'),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -45,14 +44,32 @@ router.put(
           msg: 'کاربر با این ایمیل وجود دارد.',
         });
       }
-      const { username, email, file } = req.body;
+      const { username, email } = req.body;
+
+      const newUser = new User({
+        username,
+        email,
+      });
+
+      if (req.body.file) {
+        newUser.image = req.body.file.path;
+        const updatedUser = await User.findByIdAndUpdate(
+          req.params.id,
+          {
+            username: newUser.username,
+            email: newUser.email,
+            image: newUser.image,
+          },
+          { new: true }
+        );
+        return res.status(200).json(updatedUser);
+      }
 
       const updatedUser = await User.findByIdAndUpdate(
         req.params.id,
         {
-          username,
-          email,
-          image: file.path,
+          username: newUser.username,
+          email: newUser.email,
         },
         { new: true }
       );

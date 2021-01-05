@@ -10,13 +10,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.auth.creator);
   const error = useSelector((state) => state.posts.error);
+
   useEffect(() => {
-    dispatch(getUser(authUser));
     if (error) {
       error.errors
         ? error.errors.forEach((err) => toast.error(err.msg))
         : toast.error(error.msg);
     }
+    dispatch(getUser(authUser));
     dispatch(clearErrors());
 
     dispatch(getAllPosts());
