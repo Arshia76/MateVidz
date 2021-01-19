@@ -52,10 +52,16 @@ router.post(
       const { title, message, file } = req.body;
 
       const creator = req.user._id;
+      const username = req.user.username;
+      const userimage = req.user.image;
       const post = await Post.create({
         creator,
         title,
         message,
+        user: {
+          username,
+          userimage,
+        },
         image: file.path,
         reviews: [],
       });

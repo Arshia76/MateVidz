@@ -23,19 +23,32 @@ const Post = ({ post, getPostDetail }) => {
     <Fragment>
       <Col xs={12} sm={6} md={4} className='mt-4'>
         <Card style={{ width: '100%', margin: 'auto' }}>
+          <Card.Title
+            className='d-flex align-items-center justify-content-between my-2 mx-4'
+            style={{ direction: 'rtl' }}
+          >
+            <h3>{post.user.username}</h3>
+            <img
+              src={post.user.userimage}
+              style={{ width: '3rem', height: '3rem', borderRadius: '50%' }}
+              alt='user img'
+            />
+          </Card.Title>
           <Card.Img
             onClick={async () => {
               await getPostDetail(post._id);
               history.push(`/detail/${post._id}`);
             }}
-            style={{ height: '15rem', cursor: 'pointer' }}
+            style={{ height: '20rem', cursor: 'pointer' }}
             variant='top'
             src={post.image}
           />
 
           <Card.Body className='text-right'>
             <Card.Title>{post.title}</Card.Title>
-            <Card.Text>{post.message}</Card.Text>
+            <Card.Text style={{ wordBreak: 'break-word' }}>
+              {post.message}
+            </Card.Text>
             <Card.Text
               style={{
                 display: 'flex',

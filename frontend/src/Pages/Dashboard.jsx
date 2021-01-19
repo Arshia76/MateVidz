@@ -47,7 +47,7 @@ const Dashboard = () => {
     });
   };
   return (
-    <Container className='p-4 mt-5' fluid>
+    <Container className='p-2 mt-5' fluid>
       <Col className='bg-dark shadow-lg rounded'>
         <Form encType='multipart/form-data' style={{ direction: 'rtl' }}>
           <Row>

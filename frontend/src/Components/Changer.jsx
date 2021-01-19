@@ -5,12 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Changer = ({ post, show, handleClose, type }) => {
   const owner = useSelector((state) => state.auth.creator);
+  const username = useSelector((state) => state.auth.user);
+  const userimage = useSelector((state) => state.auth.image);
 
   const [state, setState] = useState({
     title: type === 'بروز رسانی' ? post.title : '',
     message: type === 'بروز رسانی' ? post.message : '',
     postImage: type === 'بروز رسانی' ? post.image : '',
     creator: owner,
+    user: type !== 'بروز رسانی' && {
+      username: type !== 'بروز رسانی' && username,
+      userimage: type !== 'بروز رسانی' && userimage,
+    },
   });
 
   const onChange = (e) => {
@@ -26,6 +32,7 @@ const Changer = ({ post, show, handleClose, type }) => {
     form.append('title', state.title);
     form.append('message', state.message);
     form.append('creator', state.creator);
+    form.append('user', state.user);
 
     type === 'بروز رسانی'
       ? dispatch(updatePost(post._id, form))

@@ -38,10 +38,16 @@ router.put(
       });
       let users = await User.find({ _id: { $ne: req.params.id } });
       const emailUser = users.some((u) => u.email === user.email);
+      const userName = users.some((u) => u.username === user.username);
 
       if (emailUser) {
         return res.status(400).json({
           msg: 'کاربر با این ایمیل وجود دارد.',
+        });
+      }
+      if (userName) {
+        return res.status(400).json({
+          msg: 'کاربر با این نام وجود دارد.',
         });
       }
       const { username, email } = req.body;

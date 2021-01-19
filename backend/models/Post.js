@@ -26,6 +26,22 @@ const PostSchema = new mongoose.Schema({
     required: true,
   },
 
+  user: {
+    username: {
+      type: String,
+      required: true,
+    },
+    userimage: {
+      type: String,
+      required: true,
+    },
+  },
+
+  favorite: {
+    type: Boolean,
+    default: false,
+  },
+
   title: {
     type: String,
     required: true,

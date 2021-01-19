@@ -6,6 +6,7 @@ const initialState = {
   error: null,
   loading: false,
   user: null,
+  image: null,
   creator: null,
 };
 
@@ -22,6 +23,7 @@ const Auth = (state = initialState, action) => {
         user: action.payload.username,
         error: null,
         creator: action.payload.id,
+        image: action.payload.image,
       };
 
     case types.REGISTER_FAIL:
@@ -35,6 +37,7 @@ const Auth = (state = initialState, action) => {
         loading: false,
         user: null,
         creator: null,
+        image: null,
       };
     case types.LOGIN_SUCCESSFUL:
       localStorage.setItem('auth-token', action.payload.token);
@@ -47,6 +50,7 @@ const Auth = (state = initialState, action) => {
         user: action.payload.username,
         error: null,
         creator: action.payload.id,
+        image: action.payload.image,
       };
 
     case types.LOGIN_FAIL:
@@ -60,6 +64,7 @@ const Auth = (state = initialState, action) => {
         loading: false,
         user: null,
         creator: null,
+        image: null,
       };
 
     case types.SET_LOADING:
@@ -78,6 +83,7 @@ const Auth = (state = initialState, action) => {
         loading: false,
         user: null,
         creator: null,
+        image: null,
       };
 
     case types.LOAD_USER:
@@ -89,6 +95,7 @@ const Auth = (state = initialState, action) => {
         loading: false,
         user: action.payload.user,
         creator: action.payload.creator,
+        image: action.payload.image,
       };
 
     case types.CLEAR_ERRORS: {

@@ -41,7 +41,7 @@ a {
 .comment-container {
   height: 40vh;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-bottom: 1rem;
 }
 

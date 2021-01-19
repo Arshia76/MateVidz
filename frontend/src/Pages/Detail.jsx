@@ -34,15 +34,15 @@ const Detail = () => {
   return (
     <Container>
       <Row className='p-4 text-center'>
-        <Col xs={12} sm={6}>
+        <Col xs={12} md={6}>
           <img
             src={`http://localhost:5000/${post.post.image}`}
             alt='post'
-            className='w-100 '
-            style={{ height: '60vh' }}
+            className='w-100 mb-3 '
+            style={{ height: '25rem' }}
           />
         </Col>
-        <Col xs={12} sm={6}>
+        <Col xs={12} md={6}>
           <h2>نظرات</h2>
           <hr className='bg-warning' />
           <div className='comment-container'>

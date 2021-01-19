@@ -45,8 +45,8 @@ router.post(
           msg: 'کاربر با این ایمیل وجود دارد.',
         });
       }
-	  
-	   let user1 = await User.findOne({
+
+      let user1 = await User.findOne({
         username,
       });
       if (user1) {
@@ -54,7 +54,6 @@ router.post(
           msg: 'کاربر با این نام کاربری وجود دارد.',
         });
       }
-
 
       if (!file)
         return res.status(400).json({
@@ -84,7 +83,7 @@ router.post(
             throw err;
           }
 
-          res.json({ id: user._id, username, token });
+          res.json({ id: user._id, username, token, image });
         }
       );
     } catch (err) {
@@ -141,7 +140,12 @@ router.post(
             throw err;
           }
 
-          res.json({ id: user._id, username: user.username, token });
+          res.json({
+            id: user._id,
+            username: user.username,
+            token,
+            image: user.image,
+          });
         }
       );
     } catch (err) {
@@ -154,7 +158,9 @@ router.post(
 router.get('/user', authorize, async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
-    return res.status(200).json({ creator: user._id, user: user.username });
+    return res
+      .status(200)
+      .json({ creator: user._id, user: user.username, image: user.image });
   } catch (err) {
     return res.status(400).json({ msg: 'ابتدا وارد سایت شوید' });
   }
