@@ -47,25 +47,26 @@ const Dashboard = () => {
     });
   };
   return (
-    <Container className='p-4 mt-5'>
+    <Container className='p-4 mt-5' fluid>
       <Col className='bg-dark shadow-lg rounded'>
         <Form encType='multipart/form-data' style={{ direction: 'rtl' }}>
           <Row>
-            <Col className='text-center' xs='12' sm='6'>
+            <Col className='text-center w-100' xs={12} sm={6}>
               <img
                 style={{
-                  margin: '10px auto',
+                  margin: 'auto',
                   borderRadius: '50%',
-                  height: '45vh',
-                  width: '45vh',
+                  marginTop: '.5rem',
+                  height: '75%',
+                  width: '75%',
                 }}
                 src={state.userImage}
                 alt='user'
               />
             </Col>
-            <Col className='text-center' xs='12' sm='6'>
+            <Col className='text-center w-100 ' xs={12} sm={6}>
               <Form.Group
-                className='mt-3'
+                className='mt-4'
                 as={Row}
                 controlId='formHorizontalText'
               >
@@ -83,7 +84,7 @@ const Dashboard = () => {
                 </Col>
               </Form.Group>
               <Form.Group
-                className='mt-3'
+                className='mt-4'
                 as={Row}
                 controlId='formHorizontalEmail'
               >
@@ -102,7 +103,7 @@ const Dashboard = () => {
               </Form.Group>
 
               <Form.Group
-                className='mt-3  d-flex align-items-center'
+                className='mt-4  d-flex align-items-center'
                 as={Row}
                 controlId='formHorizontalFile'
               >
@@ -122,7 +123,7 @@ const Dashboard = () => {
                 </Col>
               </Form.Group>
 
-              <Form.Group className='mt-3 mx-auto w-50' as={Row}>
+              <Form.Group className='mt-4 mx-auto w-50' as={Row}>
                 <Col>
                   <Button onClick={submit} className='w-100' type='submit'>
                     ثبت تغییرات

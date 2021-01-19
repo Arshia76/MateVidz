@@ -21,14 +21,14 @@ const Post = ({ post, getPostDetail }) => {
 
   return (
     <Fragment>
-      <Col xs={12} sm={6} lg={4} className='mt-4'>
+      <Col xs={12} sm={6} md={4} className='mt-4'>
         <Card style={{ width: '100%', margin: 'auto' }}>
           <Card.Img
             onClick={async () => {
               await getPostDetail(post._id);
               history.push(`/detail/${post._id}`);
             }}
-            style={{ height: '37vh' }}
+            style={{ height: '15rem', cursor: 'pointer' }}
             variant='top'
             src={post.image}
           />

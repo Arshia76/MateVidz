@@ -9,8 +9,8 @@ const Posts = () => {
   const searchPosts = useSelector((state) => state.search.posts);
 
   return (
-    <Container className='p-4'>
-      <Row>
+    <Container fluid>
+      <Row className='text-center'>
         {searchPosts
           ? searchPosts.map((post) => <Post key={post._id} post={post} />)
           : posts.map((post) => <Post key={post._id} post={post} />)}

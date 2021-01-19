@@ -45,6 +45,16 @@ router.post(
           msg: 'کاربر با این ایمیل وجود دارد.',
         });
       }
+	  
+	   let user1 = await User.findOne({
+        username,
+      });
+      if (user1) {
+        res.status(400).json({
+          msg: 'کاربر با این نام کاربری وجود دارد.',
+        });
+      }
+
 
       if (!file)
         return res.status(400).json({

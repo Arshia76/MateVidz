@@ -23,7 +23,7 @@ const Home = () => {
     dispatch(getAllPosts());
   }, [error, dispatch, authUser]);
   return (
-    <Container>
+    <Container fluid>
       <Posts />
     </Container>
   );

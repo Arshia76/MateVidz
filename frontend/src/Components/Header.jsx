@@ -18,7 +18,7 @@ const Header = () => {
   useEffect(() => {
     if (error) toast.error(error.msg || error.errors[0].msg);
     dispatch(clearErrors());
-  }, []);
+  }, [error]);
   const dispatch = useDispatch();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -40,10 +40,10 @@ const Header = () => {
         className='text-right text-lg-center sticky-top'
       >
         <Navbar.Brand
-          src='https://cdn2.iconfinder.com/data/icons/valentines-day-flat-line-1/50/love-notebook-128.png'
+          src='https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_facebook_messenger-128.png'
           as='img'
           href='#home'
-          style={{ height: '6rem', width: '6rem' }}
+          style={{ height: '5.5rem', width: '5.5rem' }}
         />
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>

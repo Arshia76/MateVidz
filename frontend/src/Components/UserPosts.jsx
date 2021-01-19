@@ -8,7 +8,7 @@ const Posts = () => {
   const posts = useSelector((state) => state.posts.userPosts);
 
   return (
-    <Container className='p-4'>
+    <Container className='pb-4' fluid>
       <Row>
         {posts.map((post) => (
           <Post key={post._id} post={post} />
