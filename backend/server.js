@@ -5,8 +5,8 @@ const connectDB = require('./config/db');
 
 app.use(cors());
 app.use('/backend/uploads', express.static('./backend/uploads'));
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.json({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 connectDB();
 

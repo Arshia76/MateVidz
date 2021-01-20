@@ -13,7 +13,7 @@ const initialState = {
 const Auth = (state = initialState, action) => {
   switch (action.type) {
     case types.REGISTER_SUCCESSFUL:
-      localStorage.setItem('auth-token', action.payload.token);
+      localStorage.setItem('notify-auth-token', action.payload.token);
 
       return {
         ...state,
@@ -27,7 +27,7 @@ const Auth = (state = initialState, action) => {
       };
 
     case types.REGISTER_FAIL:
-      localStorage.removeItem('auth-token');
+      localStorage.removeItem('notify-auth-token');
 
       return {
         ...state,
@@ -40,7 +40,7 @@ const Auth = (state = initialState, action) => {
         image: null,
       };
     case types.LOGIN_SUCCESSFUL:
-      localStorage.setItem('auth-token', action.payload.token);
+      localStorage.setItem('notify-auth-token', action.payload.token);
 
       return {
         ...state,
@@ -54,7 +54,7 @@ const Auth = (state = initialState, action) => {
       };
 
     case types.LOGIN_FAIL:
-      localStorage.removeItem('auth-token');
+      localStorage.removeItem('notify-auth-token');
 
       return {
         ...state,
@@ -74,7 +74,7 @@ const Auth = (state = initialState, action) => {
       };
 
     case types.LOGOUT:
-      localStorage.removeItem('auth-token');
+      localStorage.removeItem('notify-auth-token');
       return {
         ...state,
         token: null,
@@ -89,7 +89,7 @@ const Auth = (state = initialState, action) => {
     case types.LOAD_USER:
       return {
         ...state,
-        token: localStorage.getItem('auth-token'),
+        token: localStorage.getItem('notify-auth-token'),
         isAuthenticated: true,
         error: null,
         loading: false,

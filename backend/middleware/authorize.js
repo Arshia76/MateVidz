@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const authorize = async (req, res, next) => {
-  const token = req.headers['auth-token'];
+  const token = req.headers['notify-auth-token'];
 
   if (!token) {
     return res.status(401).json({ msg: 'ابتدا باید وارد سایت شوید' });

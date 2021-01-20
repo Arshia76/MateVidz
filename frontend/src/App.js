@@ -16,7 +16,7 @@ function App() {
   const user = useSelector((state) => state.users.user);
 
   useEffect(() => {
-    if (localStorage.getItem('auth-token')) {
+    if (localStorage.getItem('notify-auth-token')) {
       dispatch(loadUser());
     }
   }, [dispatch, user]);

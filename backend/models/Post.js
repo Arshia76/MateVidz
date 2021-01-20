@@ -37,11 +37,6 @@ const PostSchema = new mongoose.Schema({
     },
   },
 
-  favorite: {
-    type: Boolean,
-    default: false,
-  },
-
   title: {
     type: String,
     required: true,

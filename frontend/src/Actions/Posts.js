@@ -6,7 +6,7 @@ export const getAllPosts = () => async (dispatch) => {
     setLoding();
     const res = await axios.get('/api/posts/', {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
       },
     });
     dispatch({
@@ -26,7 +26,7 @@ export const getPostDetail = (id) => async (dispatch) => {
     setLoding();
     const res = await axios.get(`/api/posts/detail/${id}`, {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
       },
     });
 
@@ -47,7 +47,7 @@ export const review = (id, commentData) => async (dispatch) => {
     setLoding();
     const res = await axios.post(`/api/posts/review/${id}`, commentData, {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
         'Content-Type': 'application/json',
       },
     });
@@ -69,7 +69,7 @@ export const like = (id, user) => async (dispatch) => {
     setLoding();
     const res = await axios.put(`/api/posts/likes/${id}`, user, {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
       },
     });
     dispatch({
@@ -89,7 +89,7 @@ export const createPost = (post) => async (dispatch) => {
     setLoding();
     const res = await axios.post('/api/posts/create', post, {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
       },
     });
     dispatch({
@@ -109,7 +109,7 @@ export const deletePost = (id) => async (dispatch) => {
     setLoding();
     const res = await axios.delete(`/api/posts/delete/${id}`, {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
       },
     });
     dispatch({
@@ -129,7 +129,7 @@ export const updatePost = (id, data) => async (dispatch) => {
     setLoding();
     const res = await axios.put(`/api/posts/update/${id}`, data, {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
         'Content-Type': 'application/json',
       },
     });
@@ -162,7 +162,7 @@ export const getReviews = (id) => async (dispatch) => {
     setLoding();
     const res = await axios.get(`/api/posts/reviews/${id}`, {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
       },
     });
 
@@ -183,7 +183,7 @@ export const getUserPosts = (id) => async (dispatch) => {
     setLoding();
     const res = await axios.get(`/api/posts/${id}`, {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
       },
     });
     dispatch({

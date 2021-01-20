@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Form, Button } from 'react-bootstrap';
-import { register } from '../Actions/Auth';
+import { SignUp } from '../Actions/Auth';
 import { toast } from 'react-toastify';
 import { clearErrors } from '../Actions/Auth';
 
@@ -31,7 +31,7 @@ const Register = ({ history }) => {
     data.append('email', state.email);
     data.append('username', state.username);
     data.append('password', state.password);
-    dispatch(register(data));
+    dispatch(SignUp(data));
   };
 
   const onChange = (e) => {

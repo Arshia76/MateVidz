@@ -5,7 +5,7 @@ export const getUser = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/users/${id}`, {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
       },
     });
 
@@ -26,7 +26,7 @@ export const updateUser = (id, data) => async (dispatch) => {
   try {
     const res = await axios.put(`/api/users/update/${id}`, data, {
       headers: {
-        'auth-token': localStorage.getItem('auth-token'),
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
         'Content-Type': 'multipart/form-data',
       },
     });

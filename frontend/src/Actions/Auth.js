@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as types from '../Types';
 
-export const register = (formData) => async (dispatch) => {
+export const SignUp = (formData) => async (dispatch) => {
   try {
     setLoding();
     const res = await axios.post('/api/auth/register', formData);
@@ -54,7 +54,7 @@ export const logout = () => (dispatch) => {
 export const loadUser = () => async (dispatch) => {
   const res = await axios.get('/api/auth/user', {
     headers: {
-      'auth-token': localStorage.getItem('auth-token'),
+      'notify-auth-token': localStorage.getItem('notify-auth-token'),
     },
   });
   dispatch({

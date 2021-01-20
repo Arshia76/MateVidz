@@ -41,7 +41,7 @@ router.post(
         email,
       });
       if (user) {
-        res.status(400).json({
+        return res.status(400).json({
           msg: 'کاربر با این ایمیل وجود دارد.',
         });
       }
@@ -50,15 +50,10 @@ router.post(
         username,
       });
       if (user1) {
-        res.status(400).json({
+        return res.status(400).json({
           msg: 'کاربر با این نام کاربری وجود دارد.',
         });
       }
-
-      if (!file)
-        return res.status(400).json({
-          msg: 'عکس پروفایل را انتخاب کنید',
-        });
 
       user = new User({
         username,
@@ -83,7 +78,7 @@ router.post(
             throw err;
           }
 
-          res.json({ id: user._id, username, token, image });
+          res.json({ id: user._id, username, token, image: user.image });
         }
       );
     } catch (err) {
