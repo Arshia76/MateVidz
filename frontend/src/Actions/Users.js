@@ -48,3 +48,27 @@ export const setLoding = () => (dispatch) => {
     type: types.SET_LOADING,
   });
 };
+
+export const updateUserFavorites = (pid, uid) => async (dispatch) => {
+  try {
+    const res = await axios.put(
+      `/api/users/favorites/${pid}/${uid}/update`,
+      null,
+      {
+        headers: {
+          'notify-auth-token': localStorage.getItem('notify-auth-token'),
+        },
+      }
+    );
+
+    dispatch({
+      type: types.USER_FAVORITES_UPDATE_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: types.USER_FAVORITES_UPDATE_FAIL,
+      payload: err.response.data,
+    });
+  }
+};

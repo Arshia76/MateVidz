@@ -10,6 +10,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.auth.creator);
   const error = useSelector((state) => state.posts.error);
+  const post = useSelector((state) => state.posts.post);
+  const userError = useSelector((state) => state.users.error);
 
   useEffect(() => {
     if (error) {
@@ -17,11 +19,17 @@ const Home = () => {
         ? error.errors.forEach((err) => toast.error(err.msg))
         : toast.error(error.msg);
     }
+    if (userError) {
+      userError.errors
+        ? userError.errors.forEach((err) => toast.error(err.msg))
+        : toast.error(userError.msg);
+    }
     dispatch(getUser(authUser));
     dispatch(clearErrors());
 
     dispatch(getAllPosts());
-  }, [error, dispatch, authUser]);
+  }, [error, dispatch, authUser, userError, post]);
+
   return (
     <Container fluid>
       <Posts />

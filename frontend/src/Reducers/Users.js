@@ -4,6 +4,7 @@ const initialState = {
   user: null,
   error: null,
   loading: false,
+  message: '',
 };
 
 const Users = (state = initialState, action) => {
@@ -30,6 +31,7 @@ const Users = (state = initialState, action) => {
         loading: false,
         error: null,
         user: action.payload,
+        favorites: [],
       };
 
     case types.USER_UPDATE_FAIL:
@@ -44,6 +46,23 @@ const Users = (state = initialState, action) => {
         ...state,
         loading: true,
       };
+
+    case types.USER_FAVORITES_UPDATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        message: action.payload.msg,
+        user: action.payload.user,
+      };
+
+    case types.USER_FAVORITES_UPDATE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

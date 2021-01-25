@@ -84,16 +84,31 @@ const Register = ({ history }) => {
           className='text-center w-75 mx-auto'
           controlId='formBasicFile'
         >
+          <label
+            htmlFor='custom-file'
+            className='bg-primary  w-100'
+            style={{
+              borderRadius: '5rem',
+              border: '1px solid white',
+              padding: '.7rem',
+              textAlign: 'right',
+              cursor: 'pointer',
+              direction: 'rtl',
+            }}
+          >
+            {state.userImage !== ''
+              ? state.userImage !== undefined
+                ? state.userImage.name
+                : 'عکس پروفایل'
+              : 'عکس پروفایل'}
+          </label>
           <Form.File
             onChange={(e) => {
               setState({ ...state, userImage: e.target.files[0] });
             }}
             id='custom-file'
-            className='bg-primary text-success'
             style={{
-              borderRadius: '5rem',
-              border: '1px solid white',
-              padding: '.7rem',
+              display: 'none',
             }}
           />
         </Form.Group>

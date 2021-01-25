@@ -49,8 +49,8 @@ const Detail = () => {
             {reviews.map((review) => {
               return (
                 <div className='comment'>
-                  <h4 className='text-warning'>{review.username} :</h4>
-                  <h4>{review.comment}</h4>
+                  <h4 className='text-warning'>{review.username} </h4>
+                  <h4 style={{ wordBreak: 'break-word' }}>{review.comment}</h4>
                 </div>
               );
             })}

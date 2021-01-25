@@ -6,14 +6,23 @@ import { useSelector } from 'react-redux';
 
 const Posts = () => {
   const posts = useSelector((state) => state.posts.posts);
-  const searchPosts = useSelector((state) => state.search.posts);
 
   return (
     <Container className='py-3' fluid>
       <Row className='text-center'>
-        {searchPosts
-          ? searchPosts.map((post) => <Post key={post._id} post={post} />)
-          : posts.map((post) => <Post key={post._id} post={post} />)}
+        {posts !== null ? (
+          posts.length === 0 ? (
+            <div className='w-100 text-center'>
+              <h1>پستی وجود ندارد</h1>
+            </div>
+          ) : (
+            posts.map((post) => <Post key={post._id} post={post} />)
+          )
+        ) : (
+          <div className='w-100 text-center'>
+            <h1>پستی وجود ندارد</h1>
+          </div>
+        )}
       </Row>
     </Container>
   );

@@ -3,6 +3,7 @@ const { uploadHandlerPost } = require('../middleware/multer');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const Post = require('../models/Post');
+const User = require('../models/User');
 const authorize = require('../middleware/authorize');
 
 router.get('/', authorize, async (req, res) => {
@@ -79,7 +80,6 @@ router.put(
   [
     check('title').not().isEmpty().withMessage('لطفا عنوان را وارد کنید.'),
     check('message').not().isEmpty().withMessage('لطفا پیام پست را وارد کنید.'),
-    check('file').not().isEmpty().withMessage('لطفا عکس را انتخاب کنید.'),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -89,19 +89,55 @@ router.put(
       });
     }
     try {
-      const { title, message, file } = req.body;
+      const { title, message } = req.body;
+      const post = new Post({
+        title,
+        message,
+      });
       const creator = req.user._id;
-      const post = await Post.findByIdAndUpdate(
+      if (req.body.file) {
+        post.image = req.body.file.path;
+        const newPost = await Post.findByIdAndUpdate(
+          req.params.id,
+          {
+            creator,
+            title: post.title,
+            message: post.message,
+            image: post.image,
+          },
+          { new: true }
+        );
+
+        const users = await User.find({});
+
+        const updatedUsers = users.map(async (user) => {
+          const index = user.favorites.findIndex((fav) => fav._id == post._id);
+          user.favorites.splice(index, 1, newPost);
+          await user.save();
+        });
+
+        return res.status(201).json(newPost);
+      }
+
+      const newPost = await Post.findByIdAndUpdate(
         req.params.id,
         {
           creator,
-          title,
-          message,
-          image: file.path,
+          title: post.title,
+          message: post.message,
         },
         { new: true }
       );
-      return res.status(201).json(post);
+
+      const users = await User.find({});
+
+      const updatedUsers = users.map(async (user) => {
+        const index = user.favorites.findIndex((fav) => fav._id == post._id);
+        user.favorites.splice(index, 1, newPost);
+        await user.save();
+      });
+
+      return res.status(201).json(newPost);
     } catch (err) {
       return res.status(500).json({ msg: 'خطای سرور' });
     }
@@ -111,6 +147,18 @@ router.put(
 router.delete('/delete/:id', authorize, async (req, res) => {
   try {
     const post = await Post.findByIdAndRemove(req.params.id);
+    const users = await User.find({});
+
+    const updatedUsers = users.map(async (user) => {
+      const index = user.favorites.findIndex((fav) => fav._id === post._id);
+      user.favorites.splice(index, 1);
+      await user.save();
+      return user;
+    });
+
+    await updatedUsers.save((err) => {
+      if (err) return err;
+    });
     return res.status(200).json({
       creator: post.creator,
       id: post._id,

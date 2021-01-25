@@ -1,24 +1,17 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Navbar, Form, Nav, FormControl, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Changer from './Changer';
 import { logout } from '../Actions/Auth';
-import { searchPosts, clearErrors } from '../Actions/Serach';
-import { getUserPosts } from '../Actions/Posts';
-import { toast } from 'react-toastify';
+import { getUserPosts, searchPosts } from '../Actions/Posts';
 
 const Header = () => {
   const [show, setShow] = useState(false);
   const auth = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
   const id = useSelector((state) => state.auth.creator);
-  const error = useSelector((state) => state.search.error);
   const [state, setText] = useState({ username: '' });
-  useEffect(() => {
-    if (error) toast.error(error.msg || error.errors[0].msg);
-    dispatch(clearErrors());
-  }, [error]);
   const dispatch = useDispatch();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

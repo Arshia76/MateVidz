@@ -4,10 +4,12 @@ import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../Actions/Users';
 import { toast } from 'react-toastify';
+import { getUserPosts, clearErrors } from '../Actions/Posts';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.user);
+  const post = useSelector((state) => state.posts.post);
   const userError = useSelector((state) => state.users.error);
   const postError = useSelector((state) => state.posts.error);
   const [state, setState] = useState({
@@ -15,11 +17,14 @@ const Dashboard = () => {
     userImage: user.image,
     email: user.email,
   });
+  const [title, setTitle] = useState('پست های من');
   useEffect(() => {
     if (userError) {
       toast.error(userError.msg || userError.errors[0].msg);
+      dispatch(clearErrors());
     } else if (postError) {
       toast.error(postError.msg || postError.errors[0].msg);
+      dispatch(clearErrors());
     } else {
       setState({
         ...state,
@@ -28,7 +33,14 @@ const Dashboard = () => {
         email: user.email,
       });
     }
-  }, [userError, postError, user]);
+    //eslint-disable-next-line
+  }, [userError, postError, user.favorites]);
+
+  useEffect(() => {
+    dispatch(getUserPosts(user._id));
+
+    //eslint-disable-next-line
+  }, [dispatch, post]);
 
   const onChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -57,7 +69,7 @@ const Dashboard = () => {
                   margin: 'auto',
                   borderRadius: '50%',
                   marginTop: '.5rem',
-                  height: '75%',
+                  height: '25rem',
                   width: '75%',
                 }}
                 src={state.userImage}
@@ -133,9 +145,34 @@ const Dashboard = () => {
             </Col>
           </Row>
         </Form>
-        <hr className='bg-secondary' />
-        <h1 style={{ textAlign: 'center', margin: '2rem 0' }}>پست های من</h1>
-        <UserPosts />
+        <Container className='d-flex align-items-center justify-content-center w-100 mt-4'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            onClick={() => setTitle('پست های من')}
+            style={{ cursor: 'pointer' }}
+            width='40'
+            height='40'
+            fill='currentColor'
+            className='bi bi-bookmark-fill mr-5'
+            viewBox='0 0 16 16'
+          >
+            <path d='M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z' />
+          </svg>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            onClick={() => setTitle('علایق من')}
+            style={{ cursor: 'pointer' }}
+            width='40'
+            height='40'
+            fill='currentColor'
+            className='bi bi-bookmark-heart-fill'
+            viewBox='0 0 16 16'
+          >
+            <path d='M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v13.5zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z' />
+          </svg>
+        </Container>
+
+        <UserPosts title={title} />
       </Col>
     </Container>
   );

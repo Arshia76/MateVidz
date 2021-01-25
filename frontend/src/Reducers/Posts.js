@@ -169,6 +169,22 @@ const Posts = (state = initialState, action) => {
         error: action.payload.msg,
       };
 
+    case types.SEARCH_SUCCESS:
+      return {
+        ...state,
+        posts: action.payload,
+        error: null,
+        loading: false,
+      };
+
+    case types.SEARCH_FAIL:
+      return {
+        ...state,
+        posts: null,
+        error: action.payload,
+        loading: false,
+      };
+
     default:
       return state;
   }
