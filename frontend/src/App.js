@@ -12,6 +12,7 @@ import Dashboard from './Pages/Dashboard';
 import Detail from './Pages/Detail';
 import Chat from './Pages/Chat';
 import Join from './Pages/Join';
+import NotFound from './Pages/NotFound';
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
           <PrivateRoute exact path='/join' component={Join} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
+          <Route component={NotFound} />
         </Switch>
       </Router>
       <ToastContainer
