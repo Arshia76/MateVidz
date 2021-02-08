@@ -10,6 +10,8 @@ import { loadUser } from './Actions/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import Dashboard from './Pages/Dashboard';
 import Detail from './Pages/Detail';
+import Chat from './Pages/Chat';
+import Join from './Pages/Join';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +30,8 @@ function App() {
           <PrivateRoute exact path='/' component={Home} />
           <PrivateRoute exact path='/dashboard' component={Dashboard} />
           <PrivateRoute exact path='/detail/:id' component={Detail} />
+          <PrivateRoute exact path='/chat' component={Chat} />
+          <PrivateRoute exact path='/join' component={Join} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
         </Switch>

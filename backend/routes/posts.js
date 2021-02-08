@@ -8,7 +8,7 @@ const authorize = require('../middleware/authorize');
 
 router.get('/', authorize, async (req, res) => {
   try {
-    const posts = await Post.find({});
+    const posts = await Post.find({}).sort({ createDate: -1 });
     return res.status(200).json(posts);
   } catch (err) {
     return res.status(500).json({ msg: 'خطای سرور' });

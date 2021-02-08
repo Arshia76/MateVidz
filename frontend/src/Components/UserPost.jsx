@@ -75,6 +75,7 @@ const UserPost = ({ post, getPostDetail }) => {
                 justifyContent: 'flex-start',
                 direction: 'rtl',
               }}
+              as='div'
             >
               <div
                 className='d-flex align-items-center ml-4 '

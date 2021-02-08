@@ -120,4 +120,13 @@ router.put('/favorites/:pid/:uid/update', authorize, async (req, res) => {
   }
 });
 
+router.get('/', authorize, async (req, res) => {
+  try {
+    const data = await User.find({});
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json({ msg: 'خطای سرور.' });
+  }
+});
+
 module.exports = router;

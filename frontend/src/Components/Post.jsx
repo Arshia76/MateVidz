@@ -80,6 +80,7 @@ const Post = ({ post, getPostDetail }) => {
                 direction: 'rtl',
                 marginBottom: '1.5rem',
               }}
+              as='div'
             >
               <div
                 className='d-flex align-items-center ml-4 '

@@ -10,7 +10,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.auth.creator);
   const error = useSelector((state) => state.posts.error);
-  const post = useSelector((state) => state.posts.post);
+  const posts = useSelector((state) => state.posts.posts);
   const userError = useSelector((state) => state.users.error);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Home = () => {
     dispatch(clearErrors());
 
     dispatch(getAllPosts());
-  }, [error, dispatch, authUser, userError, post]);
+  }, [error, dispatch, authUser, userError, posts]);
 
   return (
     <Container fluid>

@@ -65,6 +65,11 @@ const PostSchema = new mongoose.Schema({
   },
 
   reviews: [reviewSchema],
+
+  createDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.models.Post || mongoose.model('Post', PostSchema);

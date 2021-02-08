@@ -72,3 +72,22 @@ export const updateUserFavorites = (pid, uid) => async (dispatch) => {
     });
   }
 };
+
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/users', {
+      headers: {
+        'notify-auth-token': localStorage.getItem('notify-auth-token'),
+      },
+    });
+    dispatch({
+      type: types.GET_ALL_USERS_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: types.GET_ALL_USERS_FAIL,
+      payload: err.response.data,
+    });
+  }
+};

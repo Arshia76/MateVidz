@@ -25,7 +25,9 @@ router.post(
 
       if (!user)
         return res.status(404).json({ msg: 'چنین کاربری وجود ندارد.' });
-      const posts = await Post.find({ creator: user._id });
+      const posts = await Post.find({ creator: user._id }).sort({
+        createDate: -1,
+      });
       if (posts === null || !posts)
         return res.status(404).json({ msg: 'این کاربر پستی ندارد.' });
       return res.status(200).json(posts);
