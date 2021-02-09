@@ -9,12 +9,13 @@
     "frontend": "npm start --prefix frontend",
     "frontendinstall": "npm install --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Arshia Nazarlotfi",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "cloudinary": "^1.24.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
