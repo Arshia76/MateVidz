@@ -9,3 +9,9 @@
   border: 1px solid gray;
   padding: 2rem;
 }
+
+@media (max-width: 800px) {
+  .container-join {
+    width: 90% !important;
+  }
+}

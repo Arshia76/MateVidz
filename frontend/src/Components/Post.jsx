@@ -45,7 +45,7 @@ const Post = ({ post, getPostDetail }) => {
   return (
     <Fragment>
       <Col xs={12} sm={6} lg={4} className='mt-4'>
-        <Card style={{ width: '100%', margin: 'auto', height: '37rem' }}>
+        <Card style={{ width: '100%', margin: 'auto' }}>
           <Card.Title
             className='d-flex align-items-center justify-content-between my-2 mx-4'
             style={{ direction: 'rtl' }}

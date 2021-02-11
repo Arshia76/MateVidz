@@ -111,11 +111,18 @@ router.put(
         const users = await User.find({});
 
         const updatedUsers = users.map(async (user) => {
-          const index = user.favorites.findIndex((fav) => fav._id == post._id);
-          user.favorites.splice(index, 1, newPost);
-          await user.save();
+          if (user.favorites.length > 0) {
+            const index = user.favorites.findIndex(
+              (fav) => fav._id === post._id
+            );
+            if (user.creator != post.creator) {
+              user.favorites.splice(index, 1, newPost);
+              await user.save();
+            }
+          } else {
+            return user;
+          }
         });
-
         return res.status(201).json(newPost);
       }
 
@@ -132,9 +139,15 @@ router.put(
       const users = await User.find({});
 
       const updatedUsers = users.map(async (user) => {
-        const index = user.favorites.findIndex((fav) => fav._id == post._id);
-        user.favorites.splice(index, 1, newPost);
-        await user.save();
+        if (user.favorites.length > 0) {
+          const index = user.favorites.findIndex((fav) => fav._id == post._id);
+          if (user.creator != post.creator) {
+            user.favorites.splice(index, 1, newPost);
+            await user.save();
+          }
+        } else {
+          return user;
+        }
       });
 
       return res.status(201).json(newPost);

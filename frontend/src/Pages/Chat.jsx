@@ -51,7 +51,7 @@ const Chat = ({ location }) => {
     <Container>
       <Row style={{ direction: 'rtl' }}>
         <Col xs={12} sm={4}>
-          <ChatUsers users={users} />
+          <ChatUsers users={users} mb-3 mb-sm-0 />
         </Col>
         <Col xs={12} sm={8}>
           <div className='chat-box mb-3 mb-sm-0'>

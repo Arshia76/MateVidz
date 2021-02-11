@@ -10,7 +10,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.auth.creator);
   const error = useSelector((state) => state.posts.error);
-  const posts = useSelector((state) => state.posts.posts);
+  const post = useSelector((state) => state.posts.post);
   const userError = useSelector((state) => state.users.error);
 
   useEffect(() => {
@@ -24,11 +24,21 @@ const Home = () => {
         ? userError.errors.forEach((err) => toast.error(err.msg))
         : toast.error(userError.msg);
     }
-    dispatch(getUser(authUser));
-    dispatch(clearErrors());
 
+    dispatch(clearErrors());
+  }, [error, dispatch, userError]);
+
+  useEffect(() => {
+    dispatch(getUser(authUser));
+
+    //eslint-disable-next-line
+  }, [authUser]);
+
+  useEffect(() => {
     dispatch(getAllPosts());
-  }, [error, dispatch, authUser, userError, posts]);
+
+    //eslint-disable-next-line
+  }, [post]);
 
   return (
     <Container fluid>
