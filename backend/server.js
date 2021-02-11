@@ -11,7 +11,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 app.use(cors());
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(path.resolve(), '/uploads')));
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
 
