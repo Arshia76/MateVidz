@@ -83,7 +83,7 @@ router.post(
       );
     } catch (err) {
       console.error(err);
-      res.status(500).send('خطای سرور');
+      res.status(500).json({ msg: 'خطای سرور' });
     }
   }
 );
@@ -145,7 +145,7 @@ router.post(
       );
     } catch (err) {
       console.error(err);
-      res.status(500).send('خطای سرور');
+      res.status(500).json({ msg: 'خطای سرور' });
     }
   }
 );
