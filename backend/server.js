@@ -67,6 +67,13 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/search', require('./routes/search'));
 
 if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+      res.redirect(`https://${req.header('host')}${req.url}`);
+    } else {
+      next();
+    }
+  });
   app.use(express.static(path.join(path.resolve(), '/frontend/build')));
   app.get('*', (req, res) => {
     res.sendFile(
