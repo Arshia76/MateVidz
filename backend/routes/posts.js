@@ -163,15 +163,17 @@ router.delete('/delete/:id', authorize, async (req, res) => {
     const users = await User.find({});
 
     const updatedUsers = users.map(async (user) => {
-      const index = user.favorites.findIndex((fav) => fav._id === post._id);
-      user.favorites.splice(index, 1);
-      await user.save();
-      return user;
+      if (user.favorites.length > 0) {
+        const index = user.favorites.findIndex((fav) => fav._id == post._id);
+        if (user.creator != post.creator) {
+          user.favorites.splice(index, 1);
+          await user.save();
+        }
+      } else {
+        return user;
+      }
     });
 
-    await updatedUsers.save((err) => {
-      if (err) return err;
-    });
     return res.status(200).json({
       creator: post.creator,
       id: post._id,

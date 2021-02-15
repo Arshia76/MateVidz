@@ -79,6 +79,12 @@ const Users = (state = initialState, action) => {
         error: action.payload,
       };
 
+    case types.CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
     default:
       return state;
   }

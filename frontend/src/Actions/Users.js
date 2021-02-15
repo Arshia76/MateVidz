@@ -91,3 +91,9 @@ export const getAllUsers = () => async (dispatch) => {
     });
   }
 };
+
+export const clearErrors = () => (dispatch) => {
+  dispatch({
+    type: types.CLEAR_ERRORS,
+  });
+};
