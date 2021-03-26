@@ -205,7 +205,7 @@ const Header = () => {
             <Form style={{ direction: 'rtl' }} inline>
               <FormControl
                 type='text'
-                placeholder='جستجو'
+                placeholder='جستجوی کاربر'
                 onChange={onChange}
                 value={state.username}
                 className='ml-sm-2 mb-4 mb-lg-0'

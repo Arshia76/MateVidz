@@ -180,7 +180,6 @@ const Posts = (state = initialState, action) => {
     case types.SEARCH_FAIL:
       return {
         ...state,
-        posts: null,
         error: action.payload,
         loading: false,
       };
