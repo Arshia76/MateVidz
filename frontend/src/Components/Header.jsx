@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Changer from './Changer';
 import { logout } from '../Actions/Auth';
-import { getUserPosts, searchPosts } from '../Actions/Posts';
+import { getAllPosts, getUserPosts, searchPosts } from '../Actions/Posts';
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -23,6 +23,11 @@ const Header = () => {
     dispatch(searchPosts(state));
     setText({ username: '' });
   };
+
+  const getPosts = () => {
+    dispatch(getAllPosts());
+  };
+
   return (
     <Fragment>
       <Navbar
@@ -44,7 +49,7 @@ const Header = () => {
             {auth ? (
               <>
                 <Link className='link' to='/'>
-                  <Nav.Link as='li'>
+                  <Nav.Link as='li' onClick={getPosts}>
                     <svg
                       width='1em'
                       height='1em'
