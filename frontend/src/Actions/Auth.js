@@ -3,7 +3,6 @@ import * as types from '../Types';
 
 export const SignUp = (formData) => async (dispatch) => {
   try {
-    setLoding();
     const res = await axios.post('/api/auth/register', formData);
 
     dispatch({
@@ -20,7 +19,6 @@ export const SignUp = (formData) => async (dispatch) => {
 
 export const login = (formData) => async (dispatch) => {
   try {
-    setLoding();
     const res = await axios.post('/api/auth/login', formData, {
       headers: {
         'Content-Type': 'application/json',
@@ -37,12 +35,6 @@ export const login = (formData) => async (dispatch) => {
       payload: err.response.data,
     });
   }
-};
-
-export const setLoding = () => (dispatch) => {
-  dispatch({
-    type: types.SET_LOADING,
-  });
 };
 
 export const logout = () => (dispatch) => {

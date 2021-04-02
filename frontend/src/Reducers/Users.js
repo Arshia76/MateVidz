@@ -42,7 +42,7 @@ const Users = (state = initialState, action) => {
         error: action.payload,
       };
 
-    case types.SET_LOADING:
+    case types.SET_LOADING_USER:
       return {
         ...state,
         loading: true,

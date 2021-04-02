@@ -12,6 +12,7 @@ const Home = () => {
   const authUser = useSelector((state) => state.auth.creator);
   const error = useSelector((state) => state.posts.error);
   const loading = useSelector((state) => state.posts.loading);
+  const Uloading = useSelector((state) => state.users.loading);
   const post = useSelector((state) => state.posts.post);
   const userError = useSelector((state) => state.users.error);
 
@@ -43,7 +44,9 @@ const Home = () => {
     //eslint-disable-next-line
   }, [post]);
 
-  return <Container fluid>{loading ? <Loader /> : <Posts />}</Container>;
+  return (
+    <Container fluid>{loading || Uloading ? <Loader /> : <Posts />}</Container>
+  );
 };
 
 export default Home;

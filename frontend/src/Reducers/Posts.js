@@ -77,7 +77,7 @@ const Posts = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
-    case types.SET_LOADING:
+    case types.SET_LOADING_POST:
       return {
         ...state,
         loading: true,

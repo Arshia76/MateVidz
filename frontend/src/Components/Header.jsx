@@ -4,10 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Changer from './Changer';
 import { logout } from '../Actions/Auth';
-import { getAllPosts, getUserPosts, searchPosts } from '../Actions/Posts';
+import {
+  getAllPosts,
+  getUserPosts,
+  searchPosts,
+  setLoding,
+} from '../Actions/Posts';
+import { useHistory } from 'react-router-dom';
 
 const Header = () => {
   const [show, setShow] = useState(false);
+  const history = useHistory();
   const auth = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
   const id = useSelector((state) => state.auth.creator);
@@ -20,8 +27,10 @@ const Header = () => {
   };
   const search = (e) => {
     e.preventDefault();
+    dispatch(setLoding());
     dispatch(searchPosts(state));
     setText({ username: '' });
+    history.push('/');
   };
 
   const getPosts = () => {

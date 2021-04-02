@@ -165,7 +165,7 @@ export const searchPosts = (username) => async (dispatch) => {
 
 export const setLoding = () => (dispatch) => {
   dispatch({
-    type: types.SET_LOADING,
+    type: types.SET_LOADING_POST,
   });
 };
 

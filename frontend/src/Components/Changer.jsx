@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { updatePost, createPost } from '../Actions/Posts';
+import { updatePost, createPost, setLoding } from '../Actions/Posts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Changer = ({ post, show, handleClose, type }) => {
@@ -27,6 +27,7 @@ const Changer = ({ post, show, handleClose, type }) => {
 
   const submit = async (e) => {
     e.preventDefault();
+    dispatch(setLoding());
     const form = new FormData();
     form.append('postImage', state.postImage);
     form.append('title', state.title);

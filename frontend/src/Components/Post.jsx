@@ -2,7 +2,8 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Col, Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector, connect } from 'react-redux';
 import Changer from './Changer';
-import { deletePost, getPostDetail, like } from '../Actions/Posts';
+import { deletePost, getPostDetail, like, setLoding } from '../Actions/Posts';
+import { setLoading } from '../Actions/Users';
 import { updateUserFavorites } from '../Actions/Users';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
@@ -35,10 +36,12 @@ const Post = ({ post, getPostDetail }) => {
   }, [user, post._id]);
 
   const Like = () => {
+    dispatch(setLoding());
     dispatch(like(post._id, post.creator));
   };
 
   const updateFavorites = () => {
+    dispatch(setLoading());
     dispatch(updateUserFavorites(post._id, auth.creator));
   };
 
@@ -132,11 +135,13 @@ const Post = ({ post, getPostDetail }) => {
             {post.creator === auth.creator && (
               <Fragment>
                 <Button
-                  onClick={() =>
-                    error
-                      ? toast.error(error.errors[0].msg)
-                      : dispatch(deletePost(post._id))
-                  }
+                  onClick={() => {
+                    if (error) toast.error(error.errors[0].msg);
+                    else {
+                      dispatch(setLoding());
+                      dispatch(deletePost(post._id));
+                    }
+                  }}
                   variant='secondary'
                   className='mr-2'
                 >

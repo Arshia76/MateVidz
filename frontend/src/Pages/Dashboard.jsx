@@ -4,7 +4,8 @@ import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../Actions/Users';
 import { toast } from 'react-toastify';
-import { getUserPosts, clearErrors, setLoding } from '../Actions/Posts';
+import { getUserPosts, clearErrors } from '../Actions/Posts';
+import { setLoading } from '../Actions/Users';
 import Loader from '../Loader/Loader';
 
 const Dashboard = () => {
@@ -14,6 +15,7 @@ const Dashboard = () => {
   const userError = useSelector((state) => state.users.error);
   const postError = useSelector((state) => state.posts.error);
   const loading = useSelector((state) => state.users.loading);
+  const Ploading = useSelector((state) => state.posts.loading);
   const [state, setState] = useState({
     username: user.username,
     userImage: user.image,
@@ -54,7 +56,7 @@ const Dashboard = () => {
     data.append('userImage', state.userImage);
     data.append('email', state.email);
     data.append('username', state.username);
-    dispatch(setLoding());
+    dispatch(setLoading());
     dispatch(updateUser(user._id, data));
     setState({
       ...state,
@@ -63,7 +65,7 @@ const Dashboard = () => {
   };
   return (
     <Container className='p-2 mt-5' fluid>
-      {loading ? (
+      {loading || Ploading ? (
         <Loader />
       ) : (
         <Fragment>

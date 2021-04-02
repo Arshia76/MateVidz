@@ -67,12 +67,6 @@ const Auth = (state = initialState, action) => {
         image: null,
       };
 
-    case types.SET_LOADING:
-      return {
-        ...state,
-        loading: true,
-      };
-
     case types.LOGOUT:
       localStorage.removeItem('notify-auth-token');
       return {

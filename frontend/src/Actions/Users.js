@@ -1,7 +1,6 @@
 import * as types from '../Types';
 import axios from 'axios';
 export const getUser = (id) => async (dispatch) => {
-  setLoding();
   try {
     const res = await axios.get(`/api/users/${id}`, {
       headers: {
@@ -22,7 +21,6 @@ export const getUser = (id) => async (dispatch) => {
 };
 
 export const updateUser = (id, data) => async (dispatch) => {
-  setLoding();
   try {
     const res = await axios.put(`/api/users/update/${id}`, data, {
       headers: {
@@ -43,9 +41,9 @@ export const updateUser = (id, data) => async (dispatch) => {
   }
 };
 
-export const setLoding = () => (dispatch) => {
+export const setLoading = () => (dispatch) => {
   dispatch({
-    type: types.SET_LOADING,
+    type: types.SET_LOADING_USER,
   });
 };
 
