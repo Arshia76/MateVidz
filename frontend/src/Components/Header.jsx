@@ -11,6 +11,7 @@ import {
   setLoding,
 } from '../Actions/Posts';
 import { useHistory } from 'react-router-dom';
+import Resource from '../Resource';
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -47,7 +48,7 @@ const Header = () => {
         className='text-right text-lg-center sticky-top'
       >
         <Navbar.Brand
-          src='https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_facebook_messenger-128.png'
+          src={Resource.Images.LOGO}
           as='img'
           href='#home'
           style={{ height: '5.5rem', width: '5.5rem' }}

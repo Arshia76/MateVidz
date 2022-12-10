@@ -36,7 +36,7 @@ const Detail = () => {
       <Row className='p-4 text-center'>
         <Col xs={12} md={6}>
           <img
-            src={`https://matevidz.herokuapp.com/${post.post.image}`}
+            src={`https://matevidz.onrender.com/${post.post.image}`}
             alt='post'
             className='w-100 mb-3 '
             style={{ height: '25rem' }}
